@@ -1,0 +1,9 @@
+node_modules/
+dist/
+# Keep environment variables out of version control
+.env
+vscode
+migrations
+package-lock.json
+dev.db
+dev.db-journal
