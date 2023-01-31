@@ -16,6 +16,9 @@ model User {
   name         String?
   email        String   @unique
   password     String
+  rol_user     String
+  phone_number String?  @db.VarChar(12)
+  createdAt    DateTime @default(now())
   updated_at   DateTime @updatedAt
 
   gestors  Gestor[]
@@ -24,9 +27,11 @@ model User {
 }
 
 model Gestor {
-  id          Int    @id @default(autoincrement())
-  user        User   @relation(fields: [user_id], references: [id])
-  user_id     Int
+  id           Int    @id @default(autoincrement())
+  user         User   @relation(fields: [user_id], references: [id])
+  user_id      Int
+  createdAt    DateTime @default(now())
+  updated_at   DateTime @updatedAt
   
   credencial_Externa Credencial_Externa[]
 
@@ -38,7 +43,8 @@ model Credencial_Externa {
   url          String
   name         String
   username_ext String
-  password_ext String    
+  password_ext String
+  createdAt    DateTime @default(now())    
   updated_at   DateTime @updatedAt
   
   gestors  Gestor[]
