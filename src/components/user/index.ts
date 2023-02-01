@@ -3,6 +3,6 @@ import * as controller from "./controller"
 
 const userRouter: Router = Router();
 
-userRouter.post("/", controller.Registro);
+userRouter.post("/registro", controller.Registro);
 
 export default userRouter;

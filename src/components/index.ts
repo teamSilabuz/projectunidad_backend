@@ -1,2 +1,2 @@
-export { default as BootRouter } from "./boot"
-export { default as UserRouter } from "./registro"
+export { default as BootRouter } from "./boot";
+export { default as userRouter} from "./user";
