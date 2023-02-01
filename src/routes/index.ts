@@ -3,6 +3,7 @@ import * as controller from "../components";
 
 const listRouter: [string, Router][] = [
     ["boot", controller.BootRouter],
+    ["user", controller.userRouter],
 ];
 
 const routes = (app: Application) => {
