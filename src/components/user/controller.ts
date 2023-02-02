@@ -36,13 +36,15 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
         const users = await prisma.user.findFirst({ where: { email } });
         if (!users) {
             return res.status(400).send({
+                ok: false,
                 error: "Usuario no encontrado"
             });
         }
 
         const compPasw = await comparePassword(password, users.password);
         if (!compPasw) {
-            return res.status(400).send({ 
+            return res.status(400).send({
+                ok: false, 
                 error: "Contraseña incorrecta" 
             });
         }
