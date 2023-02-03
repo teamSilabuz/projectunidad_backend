@@ -31,10 +31,7 @@ describe("bootsms", (): void => {
                 id_credencial: 3
             }).expect(200)
     })
-})
 
-
-describe("bootsms", (): void => {
     it("Enviar sms con entradas no válidas", async () => {
         return request(app)
             .post("/api/v1/boot/sms")
@@ -44,9 +41,7 @@ describe("bootsms", (): void => {
             })
             .expect(500)
     })
-})
 
-describe("bootsms", (): void => {
     it("Enviar sms de las credenciales de un Sitio Web cuando el id_user que lo esta solicitando no existe en la DB", async () => {
         return request(app)
             .post("/api/v1/boot/sms")
@@ -56,9 +51,7 @@ describe("bootsms", (): void => {
             })
             .expect(404)
     })
-})
 
-describe("bootsms", (): void => {
     it("Enviar sms de las credenciales de un Sitio Web cuando el usuario que lo esta solicitando no contiene dicha credencial en la DB", async () => {
         return request(app)
             .post("/api/v1/boot/sms")
