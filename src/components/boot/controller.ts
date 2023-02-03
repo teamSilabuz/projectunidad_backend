@@ -79,7 +79,7 @@ export const SendSMS = async (req: Request, res: Response): Promise<void> => {
 export const SendEmail = async (req: Request, res: Response): Promise<Response> => {
 
     try {
-        const { id_user, id_credencial } = req.body;
+        const { id_user, id_credencial, sandboxMode } = req.body;
 
         let context = {};
         let status = 400;
@@ -117,7 +117,7 @@ export const SendEmail = async (req: Request, res: Response): Promise<Response> 
 
                 paramContext.credencialExt.password_ext = await decrypt(paramContext.credencialExt.password_ext);
 
-                const message = await sendEmail(paramContext);
+                const message = await sendEmail(paramContext, sandboxMode);
 
                 context = {
                     ok: true,

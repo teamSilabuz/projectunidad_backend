@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "nodemon",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "repository": {
     "type": "git",
@@ -27,13 +29,17 @@
     "@types/node": "18.11.18",
     "nodemon": "2.0.20",
     "prisma": "4.9.0",
+    "standard": "17.0.0",
+    "supertest": "6.3.3",
     "ts-node": "10.9.1",
     "tslib": "2.5.0",
-    "typescript": "4.9.4"
+    "typescript": "4.9.4",
+    "vitest": "0.28.3"
   },
   "dependencies": {
     "@prisma/client": "4.9.0",
     "@sendgrid/mail": "7.7.0",
+    "@types/supertest": "2.0.12",
     "bcryptjs": "2.4.3",
     "cors": "2.8.5",
     "dotenv": "16.0.3",
@@ -41,5 +47,8 @@
     "jsonwebtoken": "9.0.0",
     "ncrypt-js": "2.0.0",
     "twilio": "4.7.0"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
   }
 }
