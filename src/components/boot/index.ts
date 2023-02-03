@@ -3,6 +3,6 @@ import * as controller from "./controller";
 
 const bootRouter: Router = Router();
 
-bootRouter.get("/", controller.SendSMS);
+bootRouter.post("/sms", controller.SendSMS);
 
 export default bootRouter;
