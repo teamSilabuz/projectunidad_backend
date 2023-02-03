@@ -10,7 +10,7 @@ export const Registro = async (req: Request, res: Response): Promise<Response> =
         if (data.re_password !== data.password) {
             return res.status(400).send({
                 ok: false,
-                mesagge: "Las contraseñas deben de ser iguales"
+                message: "Las contraseñas deben de ser iguales"
             });
         }
 
@@ -44,8 +44,8 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
         const compPasw = await comparePassword(password, users.password);
         if (!compPasw) {
             return res.status(400).send({
-                ok: false, 
-                error: "Contraseña incorrecta" 
+                ok: false,
+                error: "Contraseña incorrecta"
             });
         }
 
@@ -55,15 +55,52 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
             email: users.email
         });
 
-        return res.status(200).send({ 
+        return res.status(200).send({
             ok: true,
             message: "Usuario logueado correctamente",
             token
         });
     } catch (error) {
-        return res.status(500).json({ 
-            ok: false, 
-            message: error 
+        return res.status(500).json({
+            ok: false,
+            message: error
+        });
+    }
+};
+
+
+export const updateUser = async (req: Request, res: Response): Promise<Response> => {
+    try {
+        const { name, email, phone_number } = req.body;
+
+        const usuarioExiste = await prisma.user.findFirst({ where: { email } });
+        if (!usuarioExiste) {
+            return res.status(400).send({
+                ok: false,
+                error: "Ocurrio algun error",
+            });
+        }
+
+        await prisma.user.update({
+            where: { email },
+            data: { name, email, phone_number },
+        });
+
+        return res.status(200).send({
+            ok: true,
+            message: "Usuario actualizado correctamente",
+            updatedUser: {
+                name,
+                email,
+                phone_number
+            }
+        });
+        
+
+    } catch (error) {
+        return res.status(500).json({
+            ok: false,
+            message: error
         });
     }
 };
