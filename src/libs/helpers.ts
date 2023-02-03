@@ -18,6 +18,10 @@ export const comparePassword = async (password: string, userpassword: string) =>
     }
 }
 
+export const encrypt = async (password: string) => {
+    return await ncryptObject.encrypt(password);
+}
+
 export const decrypt = async (password_encrypt: string) => {
     try {
         return await ncryptObject.decrypt(password_encrypt);
@@ -25,3 +29,4 @@ export const decrypt = async (password_encrypt: string) => {
 
     }
 }
+
