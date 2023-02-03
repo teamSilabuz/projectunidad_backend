@@ -1,19 +1,14 @@
 import bcrypt from "bcryptjs";
-<<<<<<< HEAD
-=======
 import ncrypt from "ncrypt-js";
 import env from '../config/env';
 
 var ncryptObject = new ncrypt(env.NCRYPT_SECRET_KEY);
->>>>>>> develop
 
 export const encryptPassword = async (password: string) => {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
     return hash;
 };
-<<<<<<< HEAD
-=======
 
 export const comparePassword = async (password: string, userpassword: string) => {
     try {
@@ -23,6 +18,10 @@ export const comparePassword = async (password: string, userpassword: string) =>
     }
 }
 
+export const encrypt = async (password: string) => {
+    return await ncryptObject.encrypt(password);
+}
+
 export const decrypt = async (password_encrypt: string) => {
     try {
         return await ncryptObject.decrypt(password_encrypt);
@@ -30,4 +29,4 @@ export const decrypt = async (password_encrypt: string) => {
 
     }
 }
->>>>>>> develop
+

@@ -1,14 +1,7 @@
 import type { Request, Response } from "express";
-<<<<<<< HEAD
-import { PrismaClient } from "@prisma/client";
-import { sendSMS } from "../../services";
-
-const prisma = new PrismaClient();
-=======
 import prisma from "../../datasource";
 import { sendSMS, sendEmail } from "../../services";
 import { decrypt } from "../../libs/helpers";
->>>>>>> develop
 
 export const SendSMS = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -48,13 +41,6 @@ export const SendSMS = async (req: Request, res: Response): Promise<void> => {
                     credencialExt: resul.credencial_Externa[0]
                 }
 
-<<<<<<< HEAD
-                const { body, from, to }: any = await sendSMS(paramContext);
-
-                context = {
-                    message: {
-                        ok: true,
-=======
                 paramContext.credencialExt.password_ext = await decrypt(paramContext.credencialExt.password_ext);
 
                 const { body, from, to }: any = await sendSMS(paramContext);
@@ -62,7 +48,6 @@ export const SendSMS = async (req: Request, res: Response): Promise<void> => {
                 context = {
                     ok: true,
                     message: {
->>>>>>> develop
                         body,
                         from,
                         to
@@ -89,8 +74,6 @@ export const SendSMS = async (req: Request, res: Response): Promise<void> => {
     } catch (error) {
         res.status(500).json({ error });
     }
-<<<<<<< HEAD
-=======
 }
 
 export const SendEmail = async (req: Request, res: Response): Promise<Response> => {
@@ -161,5 +144,4 @@ export const SendEmail = async (req: Request, res: Response): Promise<Response> 
         return res.status(500).json({ error });
     }
 
->>>>>>> develop
 }

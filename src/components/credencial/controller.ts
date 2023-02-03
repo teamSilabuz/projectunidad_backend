@@ -1,10 +1,12 @@
 import type { Request, Response } from "express";
 import prisma from "../../datasource";
-import { CredencialData } from "../../interfaces/CredencialDatos";
+import { encrypt } from "../../libs/helpers";
 
 export const registro = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const data: CredencialData = req.body;
+    const data = req.body;
+    
+     data.password_ext = await encrypt(data.password_ext);
 
     await prisma.credencial_Externa.create({
       data: {

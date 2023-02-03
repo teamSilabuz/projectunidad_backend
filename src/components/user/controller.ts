@@ -1,19 +1,4 @@
 import type { Response, Request } from "express";
-<<<<<<< HEAD
-import { encryptPassword } from "../../libs/helpers";
-import prisma from "../../datasource";
-
-
-export const Registro = async(req: Request, res: Response): Promise<Response> => {
-    try {
-        const data = req.body;
-
-        if(data.re_password !== data.password) {
-            return res.status(400).send({ 
-                ok: false,
-                mesagge: "Las contraseñas deben de ser iguales"
-             });
-=======
 import { encryptPassword, comparePassword } from "../../libs/helpers";
 import prisma from "../../datasource";
 import { sign } from "../../libs/jwt";
@@ -27,7 +12,6 @@ export const Registro = async (req: Request, res: Response): Promise<Response> =
                 ok: false,
                 message: "Las contraseñas deben de ser iguales"
             });
->>>>>>> develop
         }
 
         delete data.re_password;
@@ -43,8 +27,6 @@ export const Registro = async (req: Request, res: Response): Promise<Response> =
     } catch (error) {
         return res.status(500).json({ ok: false, message: error });
     }
-<<<<<<< HEAD
-=======
 };
 
 export const login = async (req: Request, res: Response): Promise<Response> => {
@@ -121,5 +103,4 @@ export const updateUser = async (req: Request, res: Response): Promise<Response>
             message: error
         });
     }
->>>>>>> develop
 };
