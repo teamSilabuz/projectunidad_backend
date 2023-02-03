@@ -45,6 +45,7 @@ export const SendSMS = async (req: Request, res: Response): Promise<void> => {
 
                 const { body, from, to }: any = await sendSMS(paramContext);
 
+                status = 200;
                 context = {
                     ok: true,
                     message: {
@@ -119,6 +120,7 @@ export const SendEmail = async (req: Request, res: Response): Promise<Response> 
 
                 const message = await sendEmail(paramContext, sandboxMode);
 
+                status = 200;
                 context = {
                     ok: true,
                     message
