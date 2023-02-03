@@ -34,9 +34,7 @@ describe("bootgmail", (): void => {
             })
             .expect(200)
     })
-})
 
-describe("bootgmail", (): void => {
     it("Enviar gmail con entradas no válidas", async () => {
         return request(app)
             .post("/api/v1/boot/email")
@@ -47,9 +45,7 @@ describe("bootgmail", (): void => {
             })
             .expect(500)
     })
-})
 
-describe("bootgmail", (): void => {
     it("Enviar gmail de las credenciales de un Sitio Web cuando el id_user que lo esta solicitando no existe en la DB", async () => {
         return request(app)
             .post("/api/v1/boot/email")
@@ -60,9 +56,7 @@ describe("bootgmail", (): void => {
             })
             .expect(404)
     })
-})
 
-describe("bootgmail", (): void => {
     it("Enviar gmail de las credenciales de un Sitio Web cuando el usuario que lo esta solicitando no contiene dicha credencial en la DB", async () => {
         return request(app)
             .post("/api/v1/boot/email")
