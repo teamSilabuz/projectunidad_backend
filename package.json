@@ -39,6 +39,7 @@
     "dotenv": "16.0.3",
     "express": "4.18.2",
     "jsonwebtoken": "9.0.0",
+    "ncrypt-js": "2.0.0",
     "twilio": "4.7.0"
   }
 }
