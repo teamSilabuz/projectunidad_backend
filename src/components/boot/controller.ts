@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import prisma from "../../datasource";
 import { sendSMS, sendEmail } from "../../services";
+import { decrypt } from "../../libs/helpers";
 
 export const SendSMS = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -40,11 +41,13 @@ export const SendSMS = async (req: Request, res: Response): Promise<void> => {
                     credencialExt: resul.credencial_Externa[0]
                 }
 
+                paramContext.credencialExt.password_ext = await decrypt(paramContext.credencialExt.password_ext);
+
                 const { body, from, to }: any = await sendSMS(paramContext);
 
                 context = {
+                    ok: true,
                     message: {
-                        ok: true,
                         body,
                         from,
                         to
@@ -111,6 +114,8 @@ export const SendEmail = async (req: Request, res: Response): Promise<Response> 
                     user: resul.user,
                     credencialExt: resul.credencial_Externa[0]
                 }
+
+                paramContext.credencialExt.password_ext = await decrypt(paramContext.credencialExt.password_ext);
 
                 const message = await sendEmail(paramContext);
 
