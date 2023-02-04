@@ -7,11 +7,11 @@ export class endecrypt {
         this.key = key
     }
 
-    public async validate_key(key_encrypt: string) {
+    private async validate_key(key_encrypt: string) {
         return await bcrypt.compare(this.key, key_encrypt);
     }
 
-    public async hash() {
+    private async hash() {
         const salt = await bcrypt.genSalt(10);
         return await bcrypt.hash(this.key, salt);
     }
