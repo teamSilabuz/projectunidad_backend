@@ -125,3 +125,46 @@ Cada una de las funcionalidades implementadas, seran consumidas desde el Fronten
         ]
     }
     ```
+
+
+
+### Componente credencial
+
+- **Recibe la data de frontend**
+
+  > Method: POST
+
+  > http://localhost:3003/api/v1/credencial/externo
+
+  _Condiciones:_
+
+  - Se registra datos del sitio externo que envia el frontend  format/  **text** en el body del Postman. Ej.
+
+    ```bash
+    {
+        "url": "http://facebook.com",
+        "name": "facebook.com",
+        "username_ext": "prueba@gmail.com",
+        "password_ext": "1234",
+        "id_gestor" : "1"
+    }
+    ```
+
+  - Response  format/json
+
+    ```bash
+    {
+      "ok": true,
+      "data": [
+        {
+          "id": 1,
+          "url": "http://facebook.com",
+          "name": "facebook.com",
+          "username_ext": "prueba@gmail.com",
+          "password_ext": "4dc3b6268468e95e9e56b3c7e95250cb.55543d8952c0cb606024d43eb7419c8f",
+          "createdAt": "2023-02-02T10:19:28.200Z",
+          "updated_at": "2023-02-02T10:19:28.200Z"
+        }
+      ]
+    } 
+    ```
