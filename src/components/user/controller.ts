@@ -5,34 +5,34 @@ import { sign } from "../../libs/jwt";
 
 export const registro =  async (req:Request, res:Response) => {
     try {
-        let data1 = req.body;
+        const body = req.body;
 
-        const usuarioExiste = await prisma.user.findFirst({ where: { email: data1.email } });
+        const usuarioExiste = await prisma.user.findFirst({ where: { email: body.email } });
         if (usuarioExiste) {
             return res.status(400).send({
                 ok: false,
-                error: "El usuario Existe",
+                message: "El usuario Existe",
             });
         }
 
 
-        if (data1.re_password !== data1.password) {
+        if (body.re_password !== body.password) {
             return res.status(400).send({
                 ok: false,
                 message: "Las contraseñas deben de ser iguales"
             });
         }
     
-        delete data1.re_password;
+        delete body.re_password;
     
-        data1.password = await encryptPassword(data1.password);
+        body.password = await encryptPassword(body.password);
     
         await prisma.user.create({
           data: {
-            name: data1.name,
-            email: data1.email,
-            password: data1.password,
-            phone_number: data1.phone_number,
+            name: body.name,
+            email: body.email,
+            password: body.password,
+            phone_number: body.phone_number,
             gestors: {
               create: {}
             },
@@ -44,7 +44,10 @@ export const registro =  async (req:Request, res:Response) => {
             message: "Usuario registrado correctamente"
         })
     } catch (error) {
-        return res.status(500).json({ ok: false, message: error });
+        return res.status(500).json({ 
+            ok: false, 
+            message: error 
+        });
     }
   };
 
@@ -56,7 +59,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
         if (!users) {
             return res.status(400).send({
                 ok: false,
-                error: "Usuario no encontrado"
+                message: "Usuario no encontrado"
             });
         }
 
@@ -64,7 +67,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
         if (!compPasw) {
             return res.status(400).send({
                 ok: false,
-                error: "Contraseña incorrecta"
+                message: "Contraseña incorrecta"
             });
         }
 
@@ -96,7 +99,7 @@ export const updateUser = async (req: Request, res: Response): Promise<Response>
         if (!usuarioExiste) {
             return res.status(400).send({
                 ok: false,
-                error: "Ocurrio algun error",
+                message: "Ocurrio algun error",
             });
         }
 
@@ -133,14 +136,14 @@ export const updatedPassExterno = async (req: Request, res: Response): Promise<R
         if (!registroExiste) {
             return res.status(400).send({
                 ok: false,
-                error: "Registro no encontrado",
+                message: "Registro no encontrado",
             });
         }
 
         if (passsword !== re_password) {
             return res.status(400).send({
                 ok: false,
-                error: "Las contraseñas deben de ser iguales"
+                message: "Las contraseñas deben de ser iguales"
             });
         }
 
