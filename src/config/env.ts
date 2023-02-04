@@ -10,5 +10,5 @@ export default {
     JWT_SECRET: process.env.JWT_SECRET as string,
     JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN as string,
     SENDGRID_API_KEY: process.env.SENDGRID_API_KEY as string,
-    NCRYPT_SECRET_KEY: process.env.NCRYPT_SECRET_KEY as string
+    ENDECRYPT_SECRET_KEY: process.env.ENDECRYPT_SECRET_KEY as string
 }
