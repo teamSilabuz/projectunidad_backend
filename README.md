@@ -158,8 +158,8 @@ Cada una de las funcionalidades implementadas, seran consumidas desde el Fronten
       "data": [
         {
           "id": 1,
-          "url": "http://twitter.com",
-          "name": "twitter.com",
+          "url": "http://facebook.com",
+          "name": "facebook.com",
           "username_ext": "prueba@gmail.com",
           "password_ext": "4dc3b6268468e95e9e56b3c7e95250cb.55543d8952c0cb606024d43eb7419c8f",
           "createdAt": "2023-02-02T10:19:28.200Z",
