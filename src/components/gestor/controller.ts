@@ -5,7 +5,7 @@ export const getCredentials =async (req: Request, res: Response): Promise<Respon
     try {
         const { id: id_user }= req.params;
         
-        const gestorExiste = await prisma.gestor.findMany({
+        const gestorExiste = await prisma.gestor.findFirst({
             where:{
                 user_id: Number(id_user)
             },
@@ -21,7 +21,13 @@ export const getCredentials =async (req: Request, res: Response): Promise<Respon
                 }
             },
         });
-
+        if (!gestorExiste) {
+            return res.status(400).send({
+                ok: false,
+                message: "El usuario no Existe",
+            });
+        }
+        
         return res.status(200).send({
             ok: true,
             message: gestorExiste,
