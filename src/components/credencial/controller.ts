@@ -27,4 +27,3 @@ export const registro = async (req: Request, res: Response): Promise<Response> =
     return res.status(500).json({ ok: false, message: error });
   }
 }
-

@@ -6,4 +6,5 @@ const credencialRouter: Router = Router();
 credencialRouter.post("/externo", controller.registro);
 
 
+
 export default credencialRouter;
