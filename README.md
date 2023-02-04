@@ -168,3 +168,119 @@ Cada una de las funcionalidades implementadas, seran consumidas desde el Fronten
       ]
     } 
     ```
+
+### Componente user
+
+- **Para registrar un usuario**
+
+  > Method: POST
+
+  > http://localhost:3003/api/v1/user/registro
+
+  _Condiciones:_
+
+  - Para el **registro de un usuario**, enviar el siguiente **json** en el body del Postman. Ej.
+
+    ```bash
+    {
+      "name":"valentina",
+      "email":"valeangeles@bill.com",
+      "password":"123",
+      "re_password":"123",
+      "phone_number":"+51990782288"
+    }
+    ```
+
+  - Response
+
+    ```bash
+    {
+        "ok": true,
+        "message": "Usuario registrado correctamente"
+    }
+    ```
+
+- **Para el login del usuario**
+
+  > Method: POST
+
+  > http://localhost:3003/api/v1/user/login
+
+  _Condiciones:_
+
+  - Para el **login de un usuario**, enviar el siguiente **json** en el body del Postman. Ej.
+
+    ```bash
+    {
+        "email":"valeangeles@bill.com",
+        "password":"123"
+    }
+    ```
+
+  - Response 
+
+    ```bash
+    {
+        "ok": true,
+        "message": "Usuario logueado correctamente",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwibmFtZSI6InZhbGVudGluYSIsImVtYWlsIjoidmFsZWFuZ2VsZXNAYmlsbC5jb20iLCJpYXQiOjE2NzU1NDMxMjYsImV4cCI6MTY3NTYyOTUyNn0.ibzYBuIUvW_s31VCVP4o66vC8eqvo0Q1efEqWxidXq0"
+    }
+    ```
+- **Para actualizar datos de un usuario**
+
+  > Method: PUT
+
+  > http://localhost:3003/api/v1/user/updateuser
+
+  _Condiciones:_
+
+  - Para el **update de un usuario**, enviar el siguiente **json** en el body del Postman. Ej.
+
+    ```bash
+    {
+        "name": "valentina", 
+        "email":"vale2@bill.com", 
+        "phone_number":"+51990782288"
+    }
+    ```
+
+  - Response
+
+    ```bash
+    {
+        "ok": true,
+        "message": "Usuario actualizado correctamente",
+        "updatedUser": {
+            "name": "valentina",
+            "email": "vale2@bill.com",
+            "phone_number": "+51990782288"
+        }
+    }
+    ```
+
+- **Para actualizar el password de credenciales externas**
+
+  > Method: PUT
+
+  > http://localhost:3003/api/v1/user/updatepassexterno
+
+  _Condiciones:_
+
+  - Para el **update del password de credenciales externas**, enviar el siguiente **json** en el body del Postman. Ej.
+
+    ```bash
+    {
+        "id_credencial": 1, 
+        "passsword":"abc", 
+        "re_password":"abc"
+    }
+    ```
+
+  - Response 
+
+    ```bash
+    {
+        "ok": true,
+        "message": "Usuario actualizado correctamente"
+    }
+    ```
