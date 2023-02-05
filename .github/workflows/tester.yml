@@ -6,16 +6,6 @@ on:
     branches:
       - feature/*
 
-  pull request:
-    branches:
-      - develop
-      - feature/*
-
-  merge:
-    branches:
-      - develop
-      - master
-
 jobs:
   build:
     runs-on: ubuntu-latest
