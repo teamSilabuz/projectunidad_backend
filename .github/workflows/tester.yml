@@ -4,7 +4,7 @@ run-name: ${{ github.actor }} is Github Test
 on:
   push:
     branches:
-      - feature/*
+      - 'feature/**'
 
 jobs:
   build:
@@ -19,12 +19,8 @@ jobs:
       with:
         node-version: 18
 
-    - name: transpilar
-      run: npm run build
-
     - name: Run tests with Jest
       run: npm run test
-
 
     - name: ejecuta
       run: npm run dev
