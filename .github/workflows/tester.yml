@@ -6,12 +6,12 @@ on:
     branches:
       - feature/*
 
-  pull-requests:
+  pull-request:
     branches:
       - develop
       - feature/*
 
-  merges:
+  merge:
     branches:
       - develop
       - master
