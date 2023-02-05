@@ -6,7 +6,7 @@ on:
     branches:
       - feature/*
 
-  pull-request:
+  pull request:
     branches:
       - develop
       - feature/*
