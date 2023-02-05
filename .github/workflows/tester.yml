@@ -18,6 +18,9 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18
+    
+    - name: dependencias
+      run: npm install
 
     - name: Run tests with Jest
       run: npm run test
