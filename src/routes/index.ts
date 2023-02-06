@@ -5,6 +5,7 @@ const listRouter: [string, Router][] = [
     ["boot", controller.BootRouter],
     ["user", controller.userRouter],
     ["credencial", controller.credencialRouter],
+    ["gestor", controller.gestorRouter],
 ];
 
 const routes = (app: Application) => {

@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
-import ncrypt from "ncrypt-js";
+import { endecrypt } from "./endecrypt";
 import env from '../config/env';
 
-var ncryptObject = new ncrypt(env.NCRYPT_SECRET_KEY);
+const endecryptObj = new endecrypt(env.ENDECRYPT_SECRET_KEY);
 
 export const encryptPassword = async (password: string) => {
     const salt = await bcrypt.genSalt(10);
@@ -19,14 +19,9 @@ export const comparePassword = async (password: string, userpassword: string) =>
 }
 
 export const encrypt = async (password: string) => {
-    return await ncryptObject.encrypt(password);
+    return await endecryptObj.encrypt(password);
 }
 
 export const decrypt = async (password_encrypt: string) => {
-    try {
-        return await ncryptObject.decrypt(password_encrypt);
-    } catch (error) {
-
-    }
+    return await endecryptObj.decrypt(password_encrypt);
 }
-

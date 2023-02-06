@@ -6,6 +6,7 @@ const userRouter: Router = Router();
 userRouter.post("/registro", controller.registro);
 userRouter.post("/login", controller.login);
 userRouter.put("/updateuser", controller.updateUser);
+userRouter.get("/perfil", controller.getUser);
 userRouter.put("/updatepassexterno", controller.updatedPassExterno);
 
 
