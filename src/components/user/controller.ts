@@ -167,14 +167,6 @@ export const updatedPassExterno = async (req: Request, res: Response): Promise<R
     try {
         let { id_credencial, password, re_password } = req.body;
 
-        const registroExiste = await prisma.credencial_Externa.findFirst({ where: { id: id_credencial } });
-        if (!registroExiste) {
-            return res.status(400).send({
-                ok: false,
-                message: "Registro no encontrado",
-            });
-        }
-
         if (password !== re_password) {
             return res.status(400).send({
                 ok: false,
@@ -189,6 +181,11 @@ export const updatedPassExterno = async (req: Request, res: Response): Promise<R
             data: {
                 password_ext: re_password1
             },
+        }).catch(() => {
+            return res.status(400).send({
+                ok: false,
+                message: "Registro no encontrado",
+            });
         });
 
         return res.status(200).send({
