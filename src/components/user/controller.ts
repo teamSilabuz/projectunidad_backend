@@ -165,7 +165,7 @@ export const updateUser = async (req: Request, res: Response): Promise<Response>
 
 export const updatedPassExterno = async (req: Request, res: Response): Promise<Response> => {
     try {
-        let { id_credencial, passsword, re_password } = req.body;
+        let { id_credencial, password, re_password } = req.body;
 
         const registroExiste = await prisma.credencial_Externa.findFirst({ where: { id: id_credencial } });
         if (!registroExiste) {
@@ -175,14 +175,14 @@ export const updatedPassExterno = async (req: Request, res: Response): Promise<R
             });
         }
 
-        if (passsword !== re_password) {
+        if (password !== re_password) {
             return res.status(400).send({
                 ok: false,
                 message: "Las contraseñas deben de ser iguales"
             });
         }
 
-        const re_password1 = await encrypt(passsword);
+        const re_password1 = await encrypt(password);
 
         await prisma.credencial_Externa.update({
             where: { id: id_credencial },
