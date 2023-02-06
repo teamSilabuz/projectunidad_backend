@@ -3,7 +3,7 @@ import { encryptPassword, comparePassword, encrypt } from "../../libs/helpers";
 import prisma from "../../datasource";
 import { sign } from "../../libs/jwt";
 
-export const registro =  async (req:Request, res:Response) => {
+export const registro = async (req: Request, res: Response) => {
     try {
         const body = req.body;
 
@@ -22,34 +22,34 @@ export const registro =  async (req:Request, res:Response) => {
                 message: "Las contraseñas deben de ser iguales"
             });
         }
-    
+
         delete body.re_password;
-    
+
         body.password = await encryptPassword(body.password);
-    
+
         await prisma.user.create({
-          data: {
-            name: body.name,
-            email: body.email,
-            password: body.password,
-            phone_number: body.phone_number,
-            gestors: {
-              create: {}
-            },
-          }
+            data: {
+                name: body.name,
+                email: body.email,
+                password: body.password,
+                phone_number: body.phone_number,
+                gestors: {
+                    create: {}
+                },
+            }
         });
-    
+
         return res.status(201).json({
             ok: true,
             message: "Usuario registrado correctamente"
         })
     } catch (error) {
-        return res.status(500).json({ 
-            ok: false, 
-            message: error 
+        return res.status(500).json({
+            ok: false,
+            message: error
         });
     }
-  };
+};
 
 export const login = async (req: Request, res: Response): Promise<Response> => {
     try {
@@ -90,6 +90,41 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
     }
 };
 
+export const getUser = async (req: Request, res: Response): Promise<Response> => {
+    try {
+        const { id_user } = req.body;
+
+        const user = await prisma.user.findFirst({
+            where: { id: id_user },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                phone_number: true
+            }
+        });
+
+        if (!user) {
+            return res.status(400).send({
+                ok: false,
+                message: "Ocurrio algun error",
+            });
+        }
+
+        return res.status(200).send({
+            ok: true,
+            message: user
+        });
+
+
+    } catch (error) {
+        return res.status(500).json({
+            ok: false,
+            message: error
+        });
+    }
+};
+
 
 export const updateUser = async (req: Request, res: Response): Promise<Response> => {
     try {
@@ -117,7 +152,7 @@ export const updateUser = async (req: Request, res: Response): Promise<Response>
                 phone_number
             }
         });
-        
+
 
     } catch (error) {
         return res.status(500).json({
@@ -151,16 +186,16 @@ export const updatedPassExterno = async (req: Request, res: Response): Promise<R
 
         await prisma.credencial_Externa.update({
             where: { id: id_credencial },
-            data: { 
+            data: {
                 password_ext: re_password1
-             },
+            },
         });
 
         return res.status(200).send({
             ok: true,
             message: "Usuario actualizado correctamente",
         });
-        
+
 
     } catch (error) {
         return res.status(500).json({
