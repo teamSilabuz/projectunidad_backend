@@ -9,3 +9,44 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+
+model User {
+  id           Int      @id @default(autoincrement())
+  name         String?
+  email        String   @unique
+  password     String
+  phone_number String  @db.VarChar(12)
+  createdAt    DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  gestors  Gestor[]
+
+  @@map("users")
+}
+
+model Gestor {
+  id           Int    @id @default(autoincrement())
+  user         User   @relation(fields: [user_id], references: [id])
+  user_id      Int
+  createdAt    DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  
+  credencial_Externa Credencial_Externa[]
+
+  @@map("gestors")
+}
+
+model Credencial_Externa {
+  id           Int    @id @default(autoincrement())
+  url          String
+  name         String
+  username_ext String
+  password_ext String
+  createdAt    DateTime @default(now())    
+  updated_at   DateTime @updatedAt
+  
+  gestors  Gestor[]
+
+  @@map("credencial_Externa")
+}

@@ -6,7 +6,13 @@
   "scripts": {
     "dev": "nodemon",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "pre-prod": "npm run build",
+    "start": "node dist/src/index.js",
+    "vercel-build": "prisma generate && prisma migrate deploy",
+    "prisma:generate": "prisma generate",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "predeploy": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -20,19 +26,32 @@
   },
   "homepage": "https://github.com/teamSilabuz/projectunidad_backend#readme",
   "devDependencies": {
+    "@types/bcryptjs": "2.4.2",
     "@types/cors": "2.8.13",
     "@types/express": "4.17.16",
+    "@types/jsonwebtoken": "9.0.1",
     "@types/node": "18.11.18",
     "nodemon": "2.0.20",
     "prisma": "4.9.0",
+    "standard": "17.0.0",
+    "supertest": "6.3.3",
     "ts-node": "10.9.1",
     "tslib": "2.5.0",
-    "typescript": "4.9.4"
+    "typescript": "4.9.4",
+    "vitest": "0.28.3"
   },
   "dependencies": {
     "@prisma/client": "4.9.0",
+    "@sendgrid/mail": "7.7.0",
+    "@types/supertest": "2.0.12",
+    "bcryptjs": "2.4.3",
     "cors": "2.8.5",
     "dotenv": "16.0.3",
-    "express": "4.18.2"
+    "express": "4.18.2",
+    "jsonwebtoken": "9.0.0",
+    "twilio": "4.7.0"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
   }
 }

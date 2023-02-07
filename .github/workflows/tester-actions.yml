@@ -1,0 +1,26 @@
+
+name: Github-actions-test
+run-name: ${{ github.actor }} is Github Test
+
+on:
+  push:
+    branches:
+      - feature/
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run tests with Jest
+      run: npm test
