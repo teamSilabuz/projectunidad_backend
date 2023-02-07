@@ -92,10 +92,10 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
 
 export const getUser = async (req: Request, res: Response): Promise<Response> => {
     try {
-        const { id_user } = req.body;
+        const { id } = req.params;
 
         const user = await prisma.user.findFirst({
-            where: { id: id_user },
+            where: { id: Number(id) },
             select: {
                 id: true,
                 name: true,
@@ -124,7 +124,6 @@ export const getUser = async (req: Request, res: Response): Promise<Response> =>
         });
     }
 };
-
 
 export const updateUser = async (req: Request, res: Response): Promise<Response> => {
     try {
