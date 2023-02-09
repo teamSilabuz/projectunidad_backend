@@ -1,26 +1,17 @@
-name: Github-actions-test
-run-name: ${{ github.actor }} is Github Test
-
+name: learn-github-actions
+run-name: ${{ github.actor }} is learning GitHub Actions
 on:
   push:
     branches:
       - 'feature/**'
-
 jobs:
-  build:
+  check-bats-version:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
-
-    - name: Decir hola
-      uses: echo 'Hola mundo'
-
-    - name: ejecuta
-      run: npm run dev
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm install -g bats
+      - run: bats -v
+      - run: npm i bcrypt
