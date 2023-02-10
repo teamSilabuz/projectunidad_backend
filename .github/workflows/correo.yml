@@ -1,0 +1,17 @@
+name: Correo-verificacion
+run-name: ${{ github.actor }} is Correro-verificacion
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  email:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Enviando correo de verificacion
+      uses: actions/email@v2
+      with:
+        to: darckneck@hotmail.com, deyvisnvg@gmail.com, leonardoloayza28@gmail.com
+        subject: "New Release: ${{github.event.release.tag_name}}"
